@@ -186,7 +186,13 @@ class RouterosAPI
             if (empty($PARSED) && !is_null($singlevalue)) {
                 $PARSED = $singlevalue;
             }
-
+            foreach ($PARSED as $lineNumber=>$line) {
+                foreach ($line as $key=>$value) {
+                    if(!mb_detect_encoding($value)) {
+                        $PARSED[$lineNumber][$key] = '';
+                    }
+                }
+            }
             return $PARSED;
         } else {
             return array();
