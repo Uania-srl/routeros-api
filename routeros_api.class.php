@@ -188,9 +188,14 @@ class RouterosAPI
             }
             foreach ($PARSED as $lineNumber=>$line) {
                 foreach ($line as $key=>$value) {
-                    if(!mb_detect_encoding($value)) {
-                        $PARSED[$lineNumber][$key] = '';
-                    }
+                        if (mb_detect_encoding($value) == 'ASCII') {
+                            continue;
+                        }
+                        if (mb_detect_encoding($value) == 'UTF-8') {
+                            $PARSED[$lineNumber][$key] =  '';
+                            continue;
+                        }
+                       $PARSED[$lineNumber][$key] = bin2hex($value);
                 }
             }
             return $PARSED;
