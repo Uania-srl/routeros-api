@@ -188,6 +188,7 @@ class RouterosAPI
             }
             foreach ($PARSED as $lineNumber=>$line) {
                 foreach ($line as $key=>$value) {
+                        if(!is_string($value)) continue;
                         if (mb_detect_encoding($value) == 'ASCII') {
                             continue;
                         }
