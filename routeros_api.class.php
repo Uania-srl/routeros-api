@@ -186,6 +186,9 @@ class RouterosAPI
             if (empty($PARSED) && !is_null($singlevalue)) {
                 $PARSED = $singlevalue;
             }
+            if(!is_array($PARSED)) {
+                return $PARSED;
+            } 
             foreach ($PARSED as $lineNumber=>$line) {
                 foreach ($line as $key=>$value) {
                         if(!is_string($value)) continue;
